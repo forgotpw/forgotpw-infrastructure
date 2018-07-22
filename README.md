@@ -1,6 +1,6 @@
 # ForgotPW Infrastructure
 
-Google Cloud Platform core infrastructure for forgotpw.com services.
+AWS core infrastructure for forgotpw.com services.
 
 # License
 
