@@ -1,0 +1,3 @@
+variable "organization" {
+  default = "forgotpw"
+}
