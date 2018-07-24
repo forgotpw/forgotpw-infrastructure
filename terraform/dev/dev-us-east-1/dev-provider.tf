@@ -22,3 +22,7 @@ variable "aws_account_id" {
 variable "region" {
   default = "us-east-1"
 }
+
+variable "apigateway_subdomain" {
+  default = "api-dev"
+}
