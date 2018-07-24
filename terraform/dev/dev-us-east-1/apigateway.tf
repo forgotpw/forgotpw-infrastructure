@@ -1,5 +1,5 @@
 resource "aws_api_gateway_rest_api" "forgotpw_api" {
-  name               = "ForgotPW API"
+  name               = "${var.apigateway_subdomain}.forgotpw.com"
   binary_media_types = ["multipart/form-data"]
 }
 
