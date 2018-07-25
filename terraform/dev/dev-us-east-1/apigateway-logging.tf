@@ -42,7 +42,7 @@ variable "logformat" {
   "requestTimeEpoch": "$context.requestTimeEpoch",
   "responseLength": "$context.responseLength",
   "responseLatency": "$context.responseLatency",
-  "status", "$context.status",
+  "status": "$context.status",
   "caller": "$context.identity.caller",
   "errorMessage": "$context.error.message"
 }
