@@ -1,6 +1,6 @@
 resource "aws_api_gateway_resource" "up" {
   rest_api_id = "${aws_api_gateway_rest_api.forgotpw_api.id}"
-  parent_id   = "${aws_api_gateway_rest_api.forgotpw_api.root_resource_id}"
+  parent_id   = "${aws_api_gateway_resource.v1.id}"
   path_part   = "up"
 }
 
