@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "deploy" {
   acl    = "private"
 
   versioning {
-    enabled = true
+    enabled = false
   }
 
   lifecycle {
