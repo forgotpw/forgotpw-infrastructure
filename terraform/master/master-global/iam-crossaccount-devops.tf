@@ -1,4 +1,5 @@
 # https://signin.aws.amazon.com/switchrole?account=478543871670&roleName=role-ops-devops&displayName=FPW_dev_devops
+# https://signin.aws.amazon.com/switchrole?account=162109821699&roleName=role-ops-devops&displayName=FPW_prod_devops
 
 resource "aws_iam_policy" "env-assumerole-ops-devops" {
   count = "${length(var.aws-account-abbrevs)}"

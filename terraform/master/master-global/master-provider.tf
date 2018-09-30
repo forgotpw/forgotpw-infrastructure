@@ -27,9 +27,8 @@ variable "aws-accounts" {
   type = "map"
 
   default = {
-    "dev" = "478543871670"
-
-    #"prod" = "tbd"
+    "dev"  = "478543871670"
+    "prod" = "162109821699"
   }
 }
 
@@ -38,7 +37,6 @@ variable "aws-account-abbrevs" {
 
   default = [
     "dev",
+    "prod"
   ]
-
-  #"prod",
 }
