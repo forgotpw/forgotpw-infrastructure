@@ -26,3 +26,7 @@ variable "region" {
 variable "apigateway_subdomain" {
   default = "api"
 }
+
+variable "website_subdomain" {
+  default = "www"
+}

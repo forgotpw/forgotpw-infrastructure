@@ -27,9 +27,9 @@ resource "aws_api_gateway_method_settings" "forgotpw_api" {
 }
 
 # MANUAL STEP: create the aws acm ssl certificate for:
-# *.forgotpw.com, forgotpw.com
+# *.api.forgotpw.com, api.forgotpw.com
 data "aws_acm_certificate" "forgotpw" {
-  domain   = "*.forgotpw.com"
+  domain   = "*.${var.apigateway_subdomain}.forgotpw.com"
   statuses = ["ISSUED"]
 }
 
@@ -45,7 +45,7 @@ resource "aws_api_gateway_base_path_mapping" "forgotpw_api" {
   domain_name = "${aws_api_gateway_domain_name.forgotpw_api.domain_name}"
 }
 
-resource "aws_api_gateway_account" "arc" {
+resource "aws_api_gateway_account" "forgotpw" {
   cloudwatch_role_arn = "${aws_iam_role.apigateway.arn}"
 }
 
