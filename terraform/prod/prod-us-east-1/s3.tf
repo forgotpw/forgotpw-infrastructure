@@ -19,52 +19,12 @@ resource "aws_s3_bucket" "userdata" {
     enabled = false
   }
 
-  server_side_encryption_configuration {
-      rule {
-        apply_server_side_encryption_by_default {
-          sse_algorithm     = "AES256"
-        }
-      }
-    }
+  # SSE-C encryption used for userdata bucket, which is enforced
+  # in code but can't be enforced with a rule or bucket policy
+
   lifecycle {
     prevent_destroy = true
   }
-}
-
-resource "aws_s3_bucket_policy" "userdata" {
-  bucket = "${aws_s3_bucket.userdata.id}"
-  policy =<<POLICY
-{
-    "Version": "2012-10-17",
-    "Id": "PutObjPolicy",
-    "Statement": [
-          {
-              "Sid": "DenyIncorrectEncryptionHeader",
-              "Effect": "Deny",
-              "Principal": "*",
-              "Action": "s3:PutObject",
-              "Resource": "arn:aws:s3:::${aws_s3_bucket.userdata.bucket}/*",
-              "Condition": {
-                      "StringNotEquals": {
-                              "s3:x-amz-server-side-encryption": "AES256"
-                        }
-              }
-          },
-          {
-              "Sid": "DenyUnEncryptedObjectUploads",
-              "Effect": "Deny",
-              "Principal": "*",
-              "Action": "s3:PutObject",
-              "Resource": "arn:aws:s3:::${aws_s3_bucket.userdata.bucket}/*",
-              "Condition": {
-                      "Null": {
-                              "s3:x-amz-server-side-encryption": true
-                      }
-              }
-          }
-    ]
-}
-POLICY
 }
 
 resource "aws_s3_bucket" "usertokens" {
