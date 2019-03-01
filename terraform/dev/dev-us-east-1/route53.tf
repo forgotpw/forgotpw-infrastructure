@@ -14,6 +14,10 @@ resource "aws_route53_record" "api" {
   }
 }
 
+resource "aws_route53_zone" "app" {
+  name = "${var.webapp_subdomain}.forgotpw.com"
+}
+
 resource "aws_route53_zone" "www" {
   name = "${var.website_subdomain}.forgotpw.com"
 }
