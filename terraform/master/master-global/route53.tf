@@ -49,3 +49,48 @@ resource "aws_route53_record" "delegate_ns_rosa_www_dev" {
     "ns-789.awsdns-34.net",
   ]
 }
+
+# delegate api (prod) subdomain to the root zone
+resource "aws_route53_record" "delegate_ns_rosa_api_prod" {
+  zone_id = "${aws_route53_zone.rosa_root.id}"
+  name    = "api.rosa.bot"
+  type    = "NS"
+  ttl     = "600"
+
+  records = [
+    "ns-663.awsdns-18.net",
+    "ns-508.awsdns-63.com",
+    "ns-1715.awsdns-22.co.uk",
+    "ns-1099.awsdns-09.org",
+  ]
+}
+
+# delegate app (prod) subdomain to the root zone
+resource "aws_route53_record" "delegate_ns_rosa_app_prod" {
+  zone_id = "${aws_route53_zone.rosa_root.id}"
+  name    = "app.rosa.bot"
+  type    = "NS"
+  ttl     = "600"
+
+  records = [
+    "ns-664.awsdns-19.net",
+    "ns-1168.awsdns-18.org",
+    "ns-284.awsdns-35.com",
+    "ns-1561.awsdns-03.co.uk",
+  ]
+}
+
+# delegate www (prod) subdomain to the root zone
+resource "aws_route53_record" "delegate_ns_rosa_www_prod" {
+  zone_id = "${aws_route53_zone.rosa_root.id}"
+  name    = "www.rosa.bot"
+  type    = "NS"
+  ttl     = "600"
+
+  records = [
+    "ns-1869.awsdns-41.co.uk",
+    "ns-694.awsdns-22.net",
+    "ns-1106.awsdns-10.org",
+    "ns-114.awsdns-14.com",
+  ]
+}
