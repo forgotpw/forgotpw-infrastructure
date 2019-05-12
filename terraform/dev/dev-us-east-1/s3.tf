@@ -49,35 +49,35 @@ resource "aws_s3_bucket" "usertokens" {
 
 resource "aws_s3_bucket_policy" "usertokens" {
   bucket = "${aws_s3_bucket.usertokens.id}"
-  policy =<<POLICY
+  policy = <<POLICY
 {
     "Version": "2012-10-17",
     "Id": "PutObjPolicy",
     "Statement": [
-          {
-              "Sid": "DenyIncorrectEncryptionHeader",
-              "Effect": "Deny",
-              "Principal": "*",
-              "Action": "s3:PutObject",
-              "Resource": "arn:aws:s3:::${aws_s3_bucket.usertokens.bucket}/*",
-              "Condition": {
-                      "StringNotEquals": {
-                              "s3:x-amz-server-side-encryption": "AES256"
-                        }
-              }
-          },
-          {
-              "Sid": "DenyUnEncryptedObjectUploads",
-              "Effect": "Deny",
-              "Principal": "*",
-              "Action": "s3:PutObject",
-              "Resource": "arn:aws:s3:::${aws_s3_bucket.usertokens.bucket}/*",
-              "Condition": {
-                      "Null": {
-                              "s3:x-amz-server-side-encryption": true
-                      }
-              }
-          }
+        {
+            "Sid": "DenyIncorrectEncryptionHeader",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${aws_s3_bucket.usertokens.bucket}/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                }
+            }
+        },
+        {
+            "Sid": "DenyUnEncryptedObjectUploads",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${aws_s3_bucket.usertokens.bucket}/*",
+            "Condition": {
+                "Null": {
+                    "s3:x-amz-server-side-encryption": "true"
+                }
+            }
+        }
     ]
 }
 POLICY

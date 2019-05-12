@@ -22,56 +22,7 @@ resource "aws_route53_zone" "www" {
   name = "${var.website_subdomain}.forgotpw.com"
 }
 
-# new rosa.bot dns
-
-resource "aws_route53_zone" "rosa_root" {
-  name = "rosa.bot"
-}
-
-# delegate api subdomain to the root zone
-resource "aws_route53_record" "delegate_ns_rosa_api" {
-  zone_id = "${aws_route53_zone.rosa_root.id}"
-  name    = "${aws_route53_zone.rosa_api.name}"
-  type    = "NS"
-  ttl     = "300"
-
-  records = [
-    "${aws_route53_zone.rosa_api.name_servers.0}",
-    "${aws_route53_zone.rosa_api.name_servers.1}",
-    "${aws_route53_zone.rosa_api.name_servers.2}",
-    "${aws_route53_zone.rosa_api.name_servers.3}",
-  ]
-}
-
-# delegate app subdomain to the root zone
-resource "aws_route53_record" "delegate_ns_rosa_app" {
-  zone_id = "${aws_route53_zone.rosa_root.id}"
-  name    = "${aws_route53_zone.rosa_app.name}"
-  type    = "NS"
-  ttl     = "300"
-
-  records = [
-    "${aws_route53_zone.rosa_app.name_servers.0}",
-    "${aws_route53_zone.rosa_app.name_servers.1}",
-    "${aws_route53_zone.rosa_app.name_servers.2}",
-    "${aws_route53_zone.rosa_app.name_servers.3}",
-  ]
-}
-
-# delegate app subdomain to the root zone
-resource "aws_route53_record" "delegate_ns_rosa_www" {
-  zone_id = "${aws_route53_zone.rosa_root.id}"
-  name    = "${aws_route53_zone.rosa_www.name}"
-  type    = "NS"
-  ttl     = "300"
-
-  records = [
-    "${aws_route53_zone.rosa_www.name_servers.0}",
-    "${aws_route53_zone.rosa_www.name_servers.1}",
-    "${aws_route53_zone.rosa_www.name_servers.2}",
-    "${aws_route53_zone.rosa_www.name_servers.3}",
-  ]
-}
+# new rosa.bot subdomains
 
 resource "aws_route53_zone" "rosa_api" {
   name = "${var.apigateway_subdomain}.rosa.bot"
@@ -79,7 +30,7 @@ resource "aws_route53_zone" "rosa_api" {
 
 resource "aws_route53_record" "rosa_api" {
   zone_id = "${aws_route53_zone.rosa_api.id}"
-  name    = "${aws_api_gateway_domain_name.forgotpw_api.domain_name}"
+  name    = "${var.apigateway_subdomain}.rosa.bot"
   type    = "A"
 
   alias {
