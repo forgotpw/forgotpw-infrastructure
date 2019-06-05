@@ -1,7 +1,7 @@
 provider "aws" {
   region  = "${var.aws["region"]}"
   profile = "${var.aws["profile"]}"
-  version = "~> 1.28.0"
+  version = "~> 1.60"
 }
 
 variable "aws" {
