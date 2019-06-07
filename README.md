@@ -1,6 +1,8 @@
 # ForgotPW Infrastructure
 
-AWS core infrastructure for forgotpw.com services.
+*NOTE: Rosa (www.rosa.bot) is the new name for ForgotPW*
+
+AWS core infrastructure for rosa.bot services.
 
 # License
 

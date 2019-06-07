@@ -1,5 +1,5 @@
 resource "aws_api_gateway_rest_api" "forgotpw_api" {
-  name               = "${var.apigateway_subdomain}.forgotpw.com"
+  name               = "${var.apigateway_subdomain}.rosa.bot"
   binary_media_types = ["multipart/form-data"]
 }
 
@@ -26,17 +26,10 @@ resource "aws_api_gateway_method_settings" "forgotpw_api" {
   depends_on = ["aws_api_gateway_deployment.live"]
 }
 
-# MANUAL STEP: create the aws acm ssl certificate for:
-# *.api.forgotpw.com, api.forgotpw.com
-data "aws_acm_certificate" "forgotpw" {
-  domain   = "*.${var.apigateway_subdomain}.forgotpw.com"
-  statuses = ["ISSUED"]
-}
-
 resource "aws_api_gateway_domain_name" "forgotpw_api" {
-  domain_name = "${var.apigateway_subdomain}.forgotpw.com"
+  domain_name = "${var.apigateway_subdomain}.rosa.bot"
 
-  certificate_arn = "${data.aws_acm_certificate.forgotpw.arn}"
+  certificate_arn = "${aws_acm_certificate.api_rosa_bot.arn}"
 }
 
 resource "aws_api_gateway_base_path_mapping" "forgotpw_api" {

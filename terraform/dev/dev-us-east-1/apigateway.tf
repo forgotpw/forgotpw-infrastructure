@@ -26,15 +26,10 @@ resource "aws_api_gateway_method_settings" "forgotpw_api" {
   depends_on = ["aws_api_gateway_deployment.live"]
 }
 
-data "aws_acm_certificate" "api_rosa_bot" {
-  domain   = "${var.apigateway_subdomain}.rosa.bot"
-  statuses = ["ISSUED"]
-}
-
 resource "aws_api_gateway_domain_name" "forgotpw_api" {
   domain_name = "${var.apigateway_subdomain}.rosa.bot"
 
-  certificate_arn = "${data.aws_acm_certificate.api_rosa_bot.arn}"
+  certificate_arn = "${aws_acm_certificate.api_rosa_bot.arn}"
 }
 
 resource "aws_api_gateway_base_path_mapping" "forgotpw_api" {
