@@ -94,3 +94,17 @@ resource "aws_route53_record" "delegate_ns_rosa_www_prod" {
     "ns-114.awsdns-14.com",
   ]
 }
+
+# apex record
+resource "aws_route53_record" "apex" {
+  zone_id = "${aws_route53_zone.rosa_root.id}"
+  name    = "rosa.bot"
+  type    = "A"
+
+  alias {
+    # these values are the tf output values from ../master-us-east-1/s3.tf
+    name = "rosa.bot.s3-website-us-east-1.amazonaws.com"
+    zone_id = "Z3AQBSTGFYJSTF"
+    evaluate_target_health = false
+  }
+}
