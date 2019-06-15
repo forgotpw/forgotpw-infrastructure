@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "apex" {
     acl = "public-read"
 
     website {
-        redirect_all_requests_to = "www.rosa.bot"
+        redirect_all_requests_to = "https://www.rosa.bot"
     }
 }
 
